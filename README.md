@@ -185,7 +185,7 @@ done
  
 
  
-```
+```yaml
 [keremceliker@bastion ~]$ for node in core@kcmaster{01,02,03} core@kcworker{01,02,03}  
 
 do  
@@ -199,7 +199,7 @@ done
 - Restart the "kubelet.service" from Master nodes and remove all previous/former expired certificates: 
 
  
-```shell
+```yaml
 [keremceliker@bastion ~]$ for node in core@kcmaster{01,02,02}  
 
 do  
@@ -219,7 +219,7 @@ done
 - Restart the "kubelet.service" from Worker nodes and remove all previous/former expired certificates: 
 
  
-```shell
+```yaml
 [keremceliker@bastion ~]$ for node in core@kcworker{01,02,03}  
 
 do  

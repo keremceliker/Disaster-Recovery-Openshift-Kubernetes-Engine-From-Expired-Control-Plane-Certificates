@@ -17,11 +17,11 @@ However, there is a point where the teams managing many Container infrastructure
 - In such a problem, must first be determined issue with the following commands. 
 
  
-```
-[keremceliker@bastion ~]$ export KUBECONFIG=/2021GonnaBeGood/auth/kubeconfig 
-```
+
+`[keremceliker@bastion ~]$ export KUBECONFIG=/2021GonnaBeGood/auth/kubeconfig` 
+
  
-```
+```yaml
 [keremceliker@bastion ~]$ oc get nodes  
 
 **Unable to connect to the server: x509: certificate has expired or is not yet valid** 
@@ -31,17 +31,14 @@ However, there is a point where the teams managing many Container infrastructure
 - Check the logs for the kubelet.service and and you must be getting an certificate error like the one below  
 
  
-```
-[core@kcmaster01 ~]$ sudo journalctl -a --no-pager -u kubelet -b0 | grep "E" | head -10  
+`[core@kcmaster01 ~]$ sudo journalctl -a --no-pager -u kubelet -b0 | grep "E" | head -10`
 
- 
-
-Dec 24 09:35:03 kcmaster0 hyperkube[1680]: E1024 09:35:03.175362 1680 bootstrap.go:264] Part of the existing bootstrap client certificate is expired: 2020-12-23 03:40:12 +0000 UTC 
- 
-
- 
-
-Dec 24 09:35:03 master0 hyperkube[1680]: E1024 09:35:03.193155 1680 certificate_manager.go:385] Failed while requesting a signed certificate from the master: cannot create certificate signing request: Post https://api-int.keremceliker.com:6443/apis/certificates.k8s.io/v1beta1/certificatesigningrequests: EOF 
+```yaml
+Dec 24 09:35:03 kcmaster0 hyperkube[1680]: E1024 09:35:03.175362 1680 bootstrap.go:264] 
+Part of the existing bootstrap client certificate is expired: 2020-12-23 03:40:12 +0000 UTC 
+======================
+Dec 24 09:35:03 master0 hyperkube[1680]: E1024 09:35:03.193155 1680 certificate_manager.go:385] 
+Failed while requesting a signed certificate from the master: cannot create certificate signing request: Post https://api-int.keremceliker.com:6443/apis/certificates.k8s.io/v1beta1/certificatesigningrequests: EOF 
 ```
  
 

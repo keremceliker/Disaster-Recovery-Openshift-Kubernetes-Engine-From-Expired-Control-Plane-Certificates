@@ -1,4 +1,4 @@
-# Disaster Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Certificates
+# Disaster Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Nodes Certificates
 
 Sometimes teams have to shutdown the openshift cluster for planned work, and if this is not done appropriately, there are unexpected problems.  
 

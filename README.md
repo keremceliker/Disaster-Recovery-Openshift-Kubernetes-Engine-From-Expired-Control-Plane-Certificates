@@ -1,4 +1,8 @@
 # Disaster Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Nodes Certificates
+*Written by Kerem ÇELİKER*
+- Linkedin: **`linkedin.com/in/keremceliker`**
+- Twitter: **`@CloudRss`**
+- Blog: **`www.keremceliker.com`**
 
 Sometimes teams have to shutdown the openshift cluster for planned work, and if this is not done appropriately, there are unexpected problems.  
 
@@ -10,7 +14,7 @@ However, there is a point where the teams managing many Container infrastructure
 
  
 
-In such a problem, must first be determined issue with the following commands. 
+- In such a problem, must first be determined issue with the following commands. 
 
  
 
@@ -24,7 +28,7 @@ In such a problem, must first be determined issue with the following commands.
 
  
 
-Check the logs for the kubelet.service and and you must be getting an certificate error like the one below  
+- Check the logs for the kubelet.service and and you must be getting an certificate error like the one below  
 
  
 
@@ -41,7 +45,7 @@ Dec 24 09:35:03 master0 hyperkube[1680]: E1024 09:35:03.193155 1680 certificate_
 
  
 
-Check which kubelet certificates are in expire state 
+- Check which kubelet certificates are in expire state 
 
  
 
@@ -57,7 +61,7 @@ notAfter=Oct 23 15:20:32 2020 GMT
 
  
 
-Check the validity of bootstrap certificate for kubelet authentication 
+- Check the validity of bootstrap certificate for kubelet authentication 
 
  
 
@@ -75,11 +79,11 @@ notAfter=Oct 23 15:20:32 2020 GMT
 
  
 
-In the last case if everything shows that the certificate has expired you must follow these steps in order 
+***In the last case if everything shows that the certificate has expired you must follow these steps in order***
 
  
 
-Log on to a Master Node as kcmaster01 as root to use temp. kube-apiserver and follow the step-by-step below one-to-one. 
+- Log on to a Master Node as kcmaster01 as root to use temp. kube-apiserver and follow the step-by-step below one-to-one. 
 
  
 
@@ -117,7 +121,7 @@ Log on to a Master Node as kcmaster01 as root to use temp. kube-apiserver and fo
 
  
 
-Re-create control-plane certificates by running this podman command over master0 with root user 
+- Re-create control-plane certificates by running this podman command over master0 with root user 
 
  
 
@@ -126,7 +130,7 @@ Re-create control-plane certificates by running this podman command over master0
  
  
 
-Quickly publish by forced this for Nodes across all Control Planes: 
+- Quickly publish by forced this for Nodes across all Control Planes: 
 
  
 
@@ -144,7 +148,7 @@ Quickly publish by forced this for Nodes across all Control Planes:
 
  
 
-Create a new bootstrap certificate to use kubeconfig bash. 
+- Create a new bootstrap certificate to use kubeconfig bash. 
 
  
 
@@ -156,7 +160,7 @@ Create a new bootstrap certificate to use kubeconfig bash.
 
  
 
-Check and to have the CA certificate to verify getting connections from the API server 
+- Check and to have the CA certificate to verify getting connections from the API server 
 
  
 
@@ -167,7 +171,7 @@ Check and to have the CA certificate to verify getting connections from the API 
 
  
 
-Deploy newly created boot certificate and CA certificate to all Nodes 
+- Deploy newly created boot certificate and CA certificate to all Nodes 
 
  
 
@@ -207,7 +211,7 @@ done
 
  
 
-Add machine-config-daemon-force files for all hosts and then run the following command to configure Machine-Config and accept the new updated certificate in Nodes 
+- Add machine-config-daemon-force files for all hosts and then run the following command to configure Machine-Config and accept the new updated certificate in Nodes 
 
  
 
@@ -223,7 +227,7 @@ done
 
  
 
-Restart the "kubelet.service" from Master nodes and remove all previous/former expired certificates: 
+- Restart the "kubelet.service" from Master nodes and remove all previous/former expired certificates: 
 
  
 
@@ -243,7 +247,7 @@ done
 
  
 
-Restart the "kubelet.service" from Worker nodes and remove all previous/former expired certificates: 
+- Restart the "kubelet.service" from Worker nodes and remove all previous/former expired certificates: 
 
  
 
@@ -261,7 +265,7 @@ done
 
  
 
-Confirm all newly "Pending State" CSR certificates by running the following commands and have nodes receive them. Thus, all graded operators will be running perfectly again (: 
+- Confirm all newly "Pending State" CSR certificates by running the following commands and have nodes receive them. Thus, all graded operators will be running perfectly again (: 
 
  
 
@@ -278,7 +282,7 @@ done
 
  
 
-You will need to do this several times. so wait a while for all the certificates to arrive 
+- You will need to do this several times. so wait a while for all the certificates to arrive 
 
  
 
@@ -286,7 +290,7 @@ Sometimes you need to run repeatly to oc adm certificate approve "csr name"
 
  
 
-Verify that the cluster is up and healthy again by running oc get nodes: 
+- Verify that the cluster is up and healthy again by running oc get nodes: 
 
 [root@kcmaster01 ~]# oc get co && oc get nodes -o wide 
 
@@ -298,11 +302,11 @@ Or
 
  
 
-References: 
+**References:**
 
  
 
-how to set up TLS client certificate bootstrapping for kubelets 
+- how to set up TLS client certificate bootstrapping for kubelets 
 
  
 
@@ -310,7 +314,7 @@ https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bo
 
  
 
-Recovering from expired control plane certificates 
+- Recovering from expired control plane certificates 
 
  
 
@@ -320,7 +324,7 @@ https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/h
 
  
 
-Configure Certificate Rotation for the Kubelet 
+- Configure Certificate Rotation for the Kubelet 
 
  
 

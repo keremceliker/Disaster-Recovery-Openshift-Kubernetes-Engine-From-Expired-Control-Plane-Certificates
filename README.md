@@ -61,7 +61,7 @@ notAfter=Oct 23 15:20:32 2020 GMT
  
 
  
-```
+```shell
 [core@kcmaster01 ~]$ sudo cat /etc/kubernetes/kubeconfig | grep client-certificate-data | awk '{print $2}' | base64 -d | openssl x509 -noout -dates  
 
 notBefore=Oct 22 15:37:00 2020 GMT 
@@ -128,9 +128,8 @@ notAfter=Oct 23 15:20:32 2020 GMT
 - Create a new bootstrap certificate to use kubeconfig bash. 
 
  
-```
-[root@kcmaster01 ~]$ recover-kubeconfig.sh > /2021GonnaBeGood/kubeconfig  
-```
+
+`[root@kcmaster01 ~]$ recover-kubeconfig.sh > /2021GonnaBeGood/kubeconfig`
  
 
  
@@ -153,35 +152,24 @@ notAfter=Oct 23 15:20:32 2020 GMT
  
 
  
-```
-[keremceliker@bastion ~]$ scp core@kcmaster01:/2021GonnaBeGood/kubeconfig .  
-```
+`[keremceliker@bastion ~]$ scp core@kcmaster01:/2021GonnaBeGood/kubeconfig .`
+
+`[keremceliker@bastion ~]$ scp core@kcmaster01:/2021GonnaBeGood/kubelet-ca.crt .`
+
  
-```
-[keremceliker@bastion ~]$ scp core@kcmaster01:/2021GonnaBeGood/kubelet-ca.crt . 
-```
- 
-```
+```yaml
 [keremceliker@bastion ~]$ for node in core@kcmaster{01,02,03} core@kcworker{01,02,03}  
-
 do  
-
 if [[ ! "$node" =~ "kcmaster01" ]] ; then scp kubeconfig $node:/2021GonnaBeGood; fi  
-
 ssh $node sudo cp /2021GonnaBeGood/kubeconfig /etc/kubernetes/kubeconfig  
-
 done 
 ```
  
-```
+```yaml
 [keremceliker@bastion ~]$ for node in core@kcmaster{01,02,03} core@kcworker{01,02,03} 
-
-do  
-
+do 
 if [[ ! "$node" =~ "kcmaster01" ]] ; then scp kubelet-ca.crt $node:/2021GonnaBeGood; fi  
-
 ssh $node sudo cp /2021GonnaBeGood/kubelet-ca.crt /etc/kubernetes/kubelet-ca.crt  
-
 done 
 ```
  
@@ -207,7 +195,7 @@ done
 - Restart the "kubelet.service" from Master nodes and remove all previous/former expired certificates: 
 
  
-```
+```shell
 [keremceliker@bastion ~]$ for node in core@kcmaster{01,02,02}  
 
 do  
@@ -227,7 +215,7 @@ done
 - Restart the "kubelet.service" from Worker nodes and remove all previous/former expired certificates: 
 
  
-```
+```shell
 [keremceliker@bastion ~]$ for node in core@kcworker{01,02,03}  
 
 do  
@@ -268,13 +256,11 @@ Sometimes you need to run repeatly to oc adm certificate approve "csr name"
  
 
 - Verify that the cluster is up and healthy again by running oc get nodes: 
-```
-[root@kcmaster01 ~]# oc get co && oc get nodes -o wide 
-```
+
+`[root@kcmaster01 ~]# oc get co && oc get nodes -o wide`
 Or 
-```
-[keremceliker@bastion ~]$ oc get co && oc get nodes -o wide 
-```
+
+`[keremceliker@bastion ~]$ oc get co && oc get nodes -o wide`
  
 
  

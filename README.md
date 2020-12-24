@@ -1,8 +1,12 @@
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/569/badge)](https://bestpractices.coreinfrastructure.org/projects/569)
 # Disaster Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Nodes Certificates
 *Written by Kerem ÇELİKER*
 - Linkedin: **`linkedin.com/in/keremceliker`**
 - Twitter: **`@CloudRss`**
 - Blog: **`www.keremceliker.com`**
+
+<img src="https://github.com/kubernetes/kubernetes/raw/master/logo/logo.png" width="100"> <img src="https://avatars0.githubusercontent.com/u/792337?s=200&v=4" width="100">
+
 
 Sometimes teams have to shutdown the openshift cluster for planned work, and if this is not done appropriately, there are unexpected problems.  
 

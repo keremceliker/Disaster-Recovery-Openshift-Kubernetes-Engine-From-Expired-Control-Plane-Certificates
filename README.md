@@ -296,6 +296,6 @@ https://kubernetes.io/docs/tasks/tls/certificate-rotation/
 
 ## Result 
 
-See why Kubernetes Loves Openshift or Vice Versa! ;)
+See why Kubernetes Loves Openshift or Vice Versa! 😉
 
-Hope you Learned I know that article even though the level is High and Enjoyed !
+Hope you Learned I know that article even though the level is High and Enjoyed !🙏😊

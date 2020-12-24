@@ -272,7 +272,7 @@ Or
 
  
 
-- how to set up TLS client certificate bootstrapping for kubelets 
+- How to set up TLS client certificate bootstrapping for kubelets 
 
  
 
@@ -286,9 +286,7 @@ https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bo
 
 https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/backup_and_restore/disaster-recovery#dr-scenario-3-recovering-expired-certs_dr-recovering-expired-certs 
 
- 
 
- 
 
 - Configure Certificate Rotation for the Kubelet 
 

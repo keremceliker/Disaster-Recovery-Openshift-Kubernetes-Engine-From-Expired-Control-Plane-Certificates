@@ -36,7 +36,7 @@ However, there is a point where the teams managing many Container infrastructure
 ```yaml
 Dec 24 09:35:03 kcmaster0 hyperkube[1680]: E1024 09:35:03.175362 1680 bootstrap.go:264] 
 Part of the existing bootstrap client certificate is expired: 2020-12-23 03:40:12 +0000 UTC 
-======================
+=====================================================
 Dec 24 09:35:03 master0 hyperkube[1680]: E1024 09:35:03.193155 1680 certificate_manager.go:385] 
 Failed while requesting a signed certificate from the master: cannot create certificate signing request: Post https://api-int.keremceliker.com:6443/apis/certificates.k8s.io/v1beta1/certificatesigningrequests: EOF 
 ```
@@ -45,13 +45,11 @@ Failed while requesting a signed certificate from the master: cannot create cert
 - Check which kubelet certificates are in expire state 
 
  
-```
+ 
+```yaml
 [core@kcmaster01 ~]$ sudo cat /var/lib/kubelet/pki/kubelet-client-current.pem | openssl x509 -noout -dates  
 
- 
-
 notBefore=Oct 22 15:37:00 2020 GMT  
-
 notAfter=Oct 23 15:20:32 2020 GMT 
 ```
  
@@ -85,35 +83,21 @@ notAfter=Oct 23 15:20:32 2020 GMT
  
 
  
-```
+```yaml
 [keremceliker@bastion ~]$  ssh kcmaster01 
-```
- 
-```
+
 [core@kcmaster01 ~]$ sudo su - 
- ```
  
-```
 [root@kcmaster01 ~]$ RELEASE_IMAGE=quay.io/openshift-release-dev/ocp-release:4.6.0  
-```
+
+[root@kcmaster01 ~]$ KAO_IMAGE=$( oc adm release info --registry-config='/var/lib/kubelet/config.json' "${RELEASE_IMAGE}" --image-for=cluster-kube-apiserver-operator )
  
-```
-[root@kcmaster01 ~]$ KAO_IMAGE=$( oc adm release info --registry-config='/var/lib/kubelet/config.json' "${RELEASE_IMAGE}" --image-for=cluster-kube-apiserver-operator )  
-```
- 
-```
 [root@kcmaster01~]$ podman pull --authfile=/var/lib/kubelet/config.json "${KAO_IMAGE}"  
-```
  
-```
-[root@kcmaster01 ~]$ podman run -it --network=host -v /etc/kubernetes/:/etc/kubernetes/:F--entrypoint=/usr/bin/cluster-kube-apiserver-operator "${KAO_IMAGE}" recovery-apiserver create  
-```
+[root@kcmaster01 ~]$ podman run -it --network=host -v /etc/kubernetes/:/etc/kubernetes/:F--entrypoint=/usr/bin/cluster-kube-apiserver-operator "${KAO_IMAGE}" recovery-apiserver create
  
-```
 [root@kcmaster01 ~]$ export KUBECONFIG=/etc/kubernetes/static-pod-resources/recovery-kube-apiserver-pod/admin.kubeconfig  
-```
  
-```
 [root@kcmaster01 ~]$ until oc get namespace kube-system 2>/dev/null 1>&2; do echo 'Waiting for recovery apiserver to come up.'; sleep 1; done 
 ```
  
@@ -121,7 +105,7 @@ notAfter=Oct 23 15:20:32 2020 GMT
 - Re-create control-plane certificates by running this podman command over master0 with root user 
 
  
-```
+```yaml
 [root@kcmaster01 ~]$ podman run -it --network=host -v /etc/kubernetes/:/etc/kubernetes/:F --entrypoint=/usr/bin/cluster-kube-apiserver-operator "${KAO_IMAGE}" regenerate-certificates  
 ```
  
@@ -130,15 +114,11 @@ notAfter=Oct 23 15:20:32 2020 GMT
 - Quickly publish by forced this for Nodes across all Control Planes: 
 
  
-```
+```yaml
 [root@kcmaster01 ~]$ oc patch kubeapiserver cluster -p='{"spec": {"forceRedeploymentReason": "recovery-'"$( date --rfc-3339=ns )"'"}}' --type=merge  
-```
  
-```
 [root@kcmaster01 ~]$ oc patch kubecontrollermanager cluster -p='{"spec": {"forceRedeploymentReason": "recovery-'"$( date --rfc-3339=ns )"'"}}' --type=merge  
-```
  
-```
 [root@kcmaster01 ~]$ oc patch kubescheduler cluster -p='{"spec": {"forceRedeploymentReason": "recovery-'"$( date --rfc-3339=ns )"'"}}' --type=merge 
 ```
  

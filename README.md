@@ -77,7 +77,7 @@ notAfter=Oct 23 15:20:32 2020 GMT
 
  
 
-***In the last case if everything shows that the certificate has expired you must follow these steps in order***
+## In the last case if everything shows that the certificate has expired you must follow these steps in order
 
  
 
@@ -294,6 +294,8 @@ https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/h
 
 https://kubernetes.io/docs/tasks/tls/certificate-rotation/ 
 
-• #See why Kubernetes Loves Openshift or Vice Versa! ;)
+## Result 
 
-• #Hope you Learned I know that article even though the level is High and Enjoyed !
+See why Kubernetes Loves Openshift or Vice Versa! ;)
+
+Hope you Learned I know that article even though the level is High and Enjoyed !

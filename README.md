@@ -1,2 +1,2 @@
-# Disaster-Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Certificates
+# Disaster Recovery Red Hat Openshift Container Platform 4 From Expired Control-Plane Certificates
 

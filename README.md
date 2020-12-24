@@ -292,8 +292,8 @@ https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/h
 
 - Configure Certificate Rotation for the Kubelet 
 
- 
-
- 
-
 https://kubernetes.io/docs/tasks/tls/certificate-rotation/ 
+
+• See why Kubernetes Loves Openshift or Vice Versa! ;)
+
+• Hope you Learned I know that article even though the level is High and Enjoyed !

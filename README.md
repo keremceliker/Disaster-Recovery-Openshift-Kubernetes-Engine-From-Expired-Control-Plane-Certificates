@@ -5,7 +5,7 @@
 - Twitter: **`@CloudRss`**
 - Blog: **`www.keremceliker.com`**
 
-<img src="https://github.com/keremceliker/Recovering-from-expired-control-plane-certificates/blob/main/6B479D28-E7A9-42D5-88FB-E6E7C7386031.jpeg"> 
+<img src="https://github.com/keremceliker/Disaster-Recovery-Openshift-Kubernetes-Engine-From-Expired-Control-Plane-Certificates/blob/main/AF819255-BDAA-4BE1-B56D-69661D7D0B50.jpeg"> 
 
 Sometimes teams have to shutdown the openshift cluster for planned work, and if this is not done appropriately, there are unexpected problems.  
 

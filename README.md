@@ -11,11 +11,8 @@ Sometimes teams have to shutdown the openshift cluster for planned work, and if 
 
  
 
-However, there is a point where the teams managing many Container infrastructures in general are overlooked due to their work intensives. In this case, after such a process, the core-certificates that they have already forgotten expire and after this situation, the long periods of downtime and the occurrence of money losses in different area- online customer systems  
+However, there is a point where the teams managing many Container infrastructures in general are overlooked due to their work intensives.  In this case, the core certificates have been forgotten by **a DevOps/SRE** and these certificates have expired after this situation, the long periods of downtime and the occurrence of money losses in different area- online customer systems  
 
- 
-
- 
 
 - In such a problem, must first be determined issue with the following commands. 
 
